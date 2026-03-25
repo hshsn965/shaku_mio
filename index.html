@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おしゃべりな波音に誘われたら — Oceanberry × 鱈人ら</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #1a3a5c;
+    --deep: #0d1f33;
+    --berry: #4a1942;
+    --berry-mid: #7b2d6e;
+    --cream: #f5efe6;
+    --gold: #c9a96e;
+    --wave: #2a7fbf;
+    --foam: #8ec9e8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Noto Serif JP', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(13,31,51,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    gap: 1rem;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(0.65rem, 1.4vw, 0.9rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-decoration: none;
+    line-height: 1.5;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .nav-logo span {
+    white-space: nowrap;
+  }
+  .nav-logo .logo-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.35em;
+    font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+    opacity: 0.8;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px; /* スクロールバー非表示時のずれ防止 */
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links li { flex-shrink: 0; }
+  .nav-links a {
+    font-size: 0.82rem;
+    letter-spacing: 0.35em;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-family: 'Bebas Neue', sans-serif;
+    white-space: nowrap;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  @media(max-width:600px){
+    nav { padding: 0.9rem 1.2rem; }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.2em; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  /* ── HERO SLIDESHOW ── */
+  .hero-bg {
+    position: absolute; inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  @media (min-width: 601px) {
+  .hero-bg {
+    top: 75px; /* ナビの高さに合わせて調整 */
+    left: 0; right: 0; bottom: 0;
+    position: absolute;
+  }
+}
+  /* ぼかし背景レイヤー */
+  .hero-slide-blur {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+    filter: blur(18px) brightness(0.45) saturate(1.2);
+    transform: scale(1.08);
+    z-index: 0;
+  }
+  .hero-slide-blur.active { opacity: 1; }
+  /* メイン写真レイヤー */
+  .hero-slide {
+    position: absolute; inset: 0;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+    background-color: transparent;
+    animation: none;
+    z-index: 1;
+  }
+  .hero-slide.active {
+    opacity: 1;
+    animation: kenBurns 8s ease-out forwards;
+  }
+ @keyframes kenBurns {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.0); }
+}
+  /* 画像の上にかけるオーバーレイ（テキスト読みやすさ確保） */
+  .hero-slide::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13,31,51,0.35) 0%,
+      rgba(13,31,51,0.15) 40%,
+      rgba(13,31,51,0.55) 100%
+    );
+  }
+  /* ノイズテクスチャ */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 2;
+  }
+  /* ドットナビ非表示 */
+  .slideshow-dots { display: none; }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 120px;
+    background: var(--deep);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    z-index: 2;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 8rem 2rem 220px;
+    animation: heroContentFade 1.2s 3.8s forwards;
+  }
+  @media (max-width: 600px) {
+    .hero-content { padding-top: 6rem; padding-bottom: 260px; }
+  }
+  @keyframes heroContentFade {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-22px); pointer-events: none; }
+  }
+  /* フェード後に左下に小さく残るタイトル */
+  .hero-title-mini {
+  position: absolute;
+  bottom: 160px; left: 2.5rem;
+  z-index: 5;
+  opacity: 0;
+  animation: heroMiniIn 1s 5.2s forwards;
+  pointer-events: none;
+  background: rgba(13,31,51,0.45);
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+}
+  @keyframes heroMiniIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-title-mini .mini-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    font-weight: 300;
+    color: rgba(245,239,230,0.85);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    display: block;
+  }
+  .hero-title-mini .mini-bands {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+    letter-spacing: 0.45em;
+    color: rgba(201,169,110,0.7);
+    display: block;
+    margin-top: 0.3rem;
+  }
+ @media (max-width: 600px) {
+  .hero-title-mini { bottom: 170px; left: 1.2rem; }
+}
+  .eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .title-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .title-deco {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(2.8rem, 9vw, 7rem);
+    letter-spacing: 0.12em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(201,169,110,0.18);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.4s forwards;
+    transform: translateY(6px) scale(1.08);
+    z-index: 0;
+  }
+  .main-title {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    text-shadow: 0 0 80px rgba(201,169,110,0.3);
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .main-title em { font-style: italic; color: var(--gold); }
+  .vs-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .band-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  .band-ocean { color: var(--foam); }
+  .band-tara  { color: #d4a574; }
+  .vs-sep {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    color: #ffffff;
+    letter-spacing: 0.3em;
+  }
+  .hero-sub {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+
+  /* ── BANDS ── */
+  .bands {
+    background: var(--deep);
+    padding: 8rem 2rem 6rem;
+    position: relative;
+  }
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.6em;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .bands-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .band-card {
+    padding: 3.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .band-card:hover { transform: translateY(-6px); }
+  .band-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.08;
+    transition: opacity 0.4s;
+  }
+  .band-card:hover::before { opacity: 0.14; }
+  .card-ocean {
+    background: linear-gradient(135deg, rgba(26,58,92,0.9) 0%, rgba(13,31,51,0.6) 100%);
+    border-right: 1px solid rgba(201,169,110,0.2);
+  }
+  .card-ocean::before { background: radial-gradient(circle at 30% 50%, var(--wave), transparent 70%); }
+  .card-tara { background: linear-gradient(135deg, rgba(74,25,66,0.9) 0%, rgba(13,31,51,0.6) 100%); }
+  .card-tara::before { background: radial-gradient(circle at 70% 50%, var(--berry-mid), transparent 70%); }
+  .card-icon { font-size: 2.5rem; margin-bottom: 1.2rem; margin-top: 0; display: block; }
+
+  /* ── BAND PHOTO STUDIO ── */
+  .band-photos {
+    width: 100%;
+    position: relative;
+    height: 320px;
+    margin: 1.8rem 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .photo-frame {
+    position: absolute;
+    width: 210px;
+    height: 230px;
+    background: #f8f5f0;
+    padding: 10px 10px 40px;
+    box-shadow:
+      0 8px 24px rgba(0,0,0,0.55),
+      0 2px 6px rgba(0,0,0,0.35);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                box-shadow 0.35s ease;
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.93) saturate(0.9) sepia(0.06);
+    transition: filter 0.3s;
+  }
+  .photo-frame:hover img { filter: brightness(1) saturate(1.05); }
+  .photo-frame .photo-caption {
+    position: absolute;
+    bottom: 7px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+    color: rgba(40,30,20,0.45);
+  }
+  /* Oceanberry photos */
+  .card-ocean .photo-frame:nth-child(1) {
+    transform: rotate(-6deg) translateX(-60px);
+    z-index: 1;
+  }
+  .card-ocean .photo-frame:nth-child(2) {
+    transform: rotate(5deg) translateX(60px);
+    z-index: 2;
+  }
+  .card-ocean .photo-frame:nth-child(1):hover {
+    transform: rotate(-2deg) translateX(-72px) translateY(-12px) scale(1.06);
+    z-index: 10;
+    box-shadow: 0 22px 44px rgba(0,0,0,0.7);
+  }
+  .card-ocean .photo-frame:nth-child(2):hover {
+    transform: rotate(2deg) translateX(72px) translateY(-12px) scale(1.06);
+    z-index: 10;
+    box-shadow: 0 22px 44px rgba(0,0,0,0.7);
+  }
+  /* 鱈人ら photos */
+  .card-tara .photo-frame:nth-child(1) {
+    transform: rotate(-5deg) translateX(-60px);
+    z-index: 1;
+  }
+  .card-tara .photo-frame:nth-child(2) {
+    transform: rotate(6deg) translateX(60px);
+    z-index: 2;
+  }
+  .card-tara .photo-frame:nth-child(1):hover {
+    transform: rotate(-2deg) translateX(-72px) translateY(-12px) scale(1.06);
+    z-index: 10;
+    box-shadow: 0 22px 44px rgba(0,0,0,0.7);
+  }
+  .card-tara .photo-frame:nth-child(2):hover {
+    transform: rotate(2deg) translateX(72px) translateY(-12px) scale(1.06);
+    z-index: 10;
+    box-shadow: 0 22px 44px rgba(0,0,0,0.7);
+  }
+  .card-ocean .photo-frame { border-bottom: 5px solid rgba(46,127,191,0.3); }
+  .card-tara  .photo-frame { border-bottom: 5px solid rgba(123,45,110,0.3); }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+  }
+  .card-sub {
+    font-size: 0.82rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .card-desc {
+    font-size: 1.0rem;
+    line-height: 1.9;
+    color: rgba(245,239,230,0.75);
+  }
+  .member-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    background: rgba(201,169,110,0.12);
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--gold);
+  }
+  .center-divide {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .cd-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+  .cd-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    background: var(--deep);
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(201,169,110,0.4);
+  }
+
+  /* ── INFO ── */
+  .info {
+    background: linear-gradient(180deg, var(--deep) 0%, #080f18 100%);
+    padding: 6rem 2rem 8rem;
+    text-align: center;
+    position: relative;
+  }
+  .info::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .info-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 4rem;
+    font-style: italic;
+  }
+  .info-grid {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+  }
+  .info-item { text-align: center; }
+  .info-key {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    color: rgba(201,169,110,0.6);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .info-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .info-val small {
+    font-size: 0.7em;
+    opacity: 0.6;
+    display: block;
+    margin-top: 0.2rem;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .final-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(245,239,230,0.5);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 2;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050b12;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,169,110,0.1);
+  }
+  footer p {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: rgba(245,239,230,0.2);
+  }
+  footer p .footer-chunk {
+    white-space: nowrap;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+
+  @media (max-width: 700px) {
+    .bands-grid { grid-template-columns: 1fr; }
+    .card-ocean { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.2); }
+    .center-divide { display: none; }
+    .info-grid { gap: 3rem; }
+  }
+  /* ── GALLERY ── */
+  .gallery-section {
+    background: linear-gradient(180deg, #080f18 0%, var(--deep) 100%);
+    padding: 6rem 0 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* タイトル大きく */
+  .gallery-heading {
+    text-align: center;
+    padding: 0 2rem 3.5rem;
+  }
+  .gallery-heading .memories-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.6em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  .gallery-heading .memories-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-shadow: 0 0 80px rgba(201,169,110,0.25);
+  }
+  .gallery-heading .memories-title span { color: var(--gold); }
+  .gallery-heading .memories-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.5em;
+    color: rgba(245,239,230,0.3);
+    font-family: 'Bebas Neue', sans-serif;
+    margin-top: 1rem;
+    display: block;
+  }
+
+  /* ── GALLERY SLIDESHOW (全幅) ── */
+  .gallery-slider-wrap {
+    position: relative;
+    width: 100%;
+    margin: 0 0 0;
+    overflow: hidden;
+    box-shadow: 0 -1px 0 rgba(201,169,110,0.1), 0 1px 0 rgba(201,169,110,0.1);
+  }
+  .gallery-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background: #0a1520;
+  }
+  @media (max-width: 700px) {
+    .gallery-slider { aspect-ratio: 4 / 3; }
+  }
+  .gs-slide {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    cursor: pointer;
+  }
+  .gs-slide.active { opacity: 1; }
+  .gs-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.88) saturate(0.92);
+    transition: filter 0.3s;
+  }
+  .gs-slide:hover img { filter: brightness(0.95) saturate(1); }
+  /* グラデーションオーバーレイ（下部） */
+  .gs-slide::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,15,24,0.55) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  /* 矢印ボタン */
+  .gs-btn {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(13,31,51,0.55);
+    border: 1px solid rgba(201,169,110,0.2);
+    color: var(--cream);
+    font-size: 2rem;
+    width: 54px; height: 54px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1;
+    user-select: none;
+    backdrop-filter: blur(4px);
+  }
+  .gs-btn:hover { background: rgba(201,169,110,0.2); color: var(--gold); transform: translateY(-50%) scale(1.08); }
+  .gs-prev { left: 20px; }
+  .gs-next { right: 20px; }
+  /* カウンター */
+  .gs-counter {
+    position: absolute;
+    bottom: 18px; right: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: rgba(245,239,230,0.45);
+    z-index: 10;
+  }
+  /* ドット */
+  .gs-dots {
+    position: absolute;
+    bottom: 20px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px;
+    z-index: 10;
+  }
+  .gs-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(245,239,230,0.2);
+    border: 1px solid rgba(201,169,110,0.35);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .gs-dot.active { background: var(--gold); transform: scale(1.5); }
+
+  @media (max-width: 600px) {
+    .gs-btn { width: 40px; height: 40px; font-size: 1.4rem; }
+  }
+
+  .collage {
+    position: relative;
+    max-width: 1100px;
+    margin: 4rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 60px;
+    gap: 6px;
+  }
+  .collage-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .collage-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+    filter: brightness(0.88) saturate(0.9);
+  }
+  .collage-item:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.05); }
+  .collage-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(13,31,51,0.15);
+    transition: background 0.3s;
+    pointer-events: none;
+  }
+  .collage-item:hover::after { background: rgba(13,31,51,0); }
+  .collage-item:nth-child(1)  { grid-column: 1 / 6;  grid-row: 1 / 6;  }
+  .collage-item:nth-child(2)  { grid-column: 6 / 9;  grid-row: 1 / 4;  }
+  .collage-item:nth-child(3)  { grid-column: 9 / 13; grid-row: 1 / 5;  }
+  .collage-item:nth-child(4)  { grid-column: 6 / 10; grid-row: 4 / 8;  }
+  .collage-item:nth-child(5)  { grid-column: 10 / 13;grid-row: 5 / 9;  }
+  .collage-item:nth-child(6)  { grid-column: 1 / 5;  grid-row: 6 / 10; }
+  .collage-item:nth-child(7)  { grid-column: 5 / 9;  grid-row: 8 / 12; }
+  .collage-item:nth-child(8)  { grid-column: 9 / 13; grid-row: 9 / 13; }
+  .collage-item:nth-child(9)  { grid-column: 1 / 5;  grid-row: 10 / 14; }
+  .collage-item:nth-child(10) { grid-column: 5 / 9;  grid-row: 12 / 16; }
+  .collage-item:nth-child(11) { grid-column: 9 / 13; grid-row: 13 / 17; }
+  .collage-item:nth-child(12) { grid-column: 1 / 6;  grid-row: 14 / 18; }
+  .collage-item:nth-child(13) { grid-column: 6 / 10; grid-row: 16 / 20; }
+  .collage-item:nth-child(14) { grid-column: 10 / 13;grid-row: 17 / 21; }
+  .collage-item:nth-child(15) { grid-column: 1 / 5;  grid-row: 18 / 22; }
+  @media(max-width: 700px) {
+    .collage { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 50px; }
+    .collage-item:nth-child(1)  { grid-column: 1 / 4; grid-row: 1 / 5; }
+    .collage-item:nth-child(2)  { grid-column: 4 / 7; grid-row: 1 / 4; }
+    .collage-item:nth-child(3)  { grid-column: 1 / 4; grid-row: 5 / 9; }
+    .collage-item:nth-child(4)  { grid-column: 4 / 7; grid-row: 4 / 8; }
+    .collage-item:nth-child(5)  { grid-column: 1 / 4; grid-row: 9 / 13; }
+    .collage-item:nth-child(6)  { grid-column: 4 / 7; grid-row: 8 / 12; }
+    .collage-item:nth-child(7)  { grid-column: 1 / 4; grid-row: 13 / 17; }
+    .collage-item:nth-child(8)  { grid-column: 4 / 7; grid-row: 12 / 16; }
+  }
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(5,11,18,0.96);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-img {
+    max-width: 88vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow: 0 0 80px rgba(0,0,0,0.8);
+    transition: opacity 0.25s ease;
+  }
+  .lightbox-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    background: none; border: none; color: rgba(245,239,230,0.4);
+    font-size: 1.4rem; cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: var(--gold); }
+  .lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: none; border: none;
+    color: rgba(245,239,230,0.3);
+    font-size: 3rem; cursor: pointer;
+    padding: 1rem;
+    transition: color 0.2s;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { color: var(--gold); }
+  .lightbox-counter {
+    position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.4em;
+    color: rgba(245,239,230,0.25);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span>Oceanberry × 鱈人ら</span>
+    <span class="logo-sub">LAST LIVE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">HOME</a></li>
+    <li><a href="members.html">MEMBERS</a></li>
+    <li><a href="setlist.html">SETLIST</a></li>
+    <li><a href="history.html">HISTORY</a></li>
+    <li><a href="messages.html">MESSAGES</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg" id="heroBg">
+  <div class="hero-slide-blur" data-bg="url('images/IMG_0136.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/S__10338316.jpg')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/LINE_ALBUM_20260314_260315_1.jpg')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/LINE_ALBUM_20260314_260315_2.jpg')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/LINE_ALBUM_20260314_260315_3.jpg')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/20250215.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/20250418.JPEG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/20260221.jpg')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_0113.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_0135.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_0137.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_0146_Original.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_1398.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_1399.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_2737.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_2756.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_3562.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_3565.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_3568.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_4248.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_5535.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_6164.JPG')"></div>
+  <div class="hero-slide-blur" data-bg="url('images/IMG_6165.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_0136.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/S__10338316.jpg')"></div>
+  <div class="hero-slide" data-bg="url('images/LINE_ALBUM_20260314_260315_1.jpg')"></div>
+  <div class="hero-slide" data-bg="url('images/LINE_ALBUM_20260314_260315_2.jpg')"></div>
+  <div class="hero-slide" data-bg="url('images/LINE_ALBUM_20260314_260315_3.jpg')"></div>
+  <div class="hero-slide" data-bg="url('images/20250215.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/20250418.JPEG')"></div>
+  <div class="hero-slide" data-bg="url('images/20260221.jpg')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_0113.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_0135.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_0137.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_0146_Original.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_1398.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_1399.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_2737.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_2756.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_3562.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_3565.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_3568.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_4248.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_5535.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_6164.JPG')"></div>
+  <div class="hero-slide" data-bg="url('images/IMG_6165.JPG')"></div>
+</div>
+  <!-- ドットナビ（JS で自動生成） -->
+  <div class="slideshow-dots" id="slideshowDots"></div>
+  <div class="hero-content">
+    <p class="eyebrow" style="display:none;">おしゃべりな波音に誘われたら</p>
+    <div class="title-wrap">
+      <h1 class="main-title"><span style="color:#8ec9e8;">おしゃべり</span><span style="color:#ffffff;">な</span><br><span style="color:#ffffff;">波音に誘われ</span><span style="color:#c9a96e;">たら</span></h1>
+    </div>
+    <div class="vs-row">
+      <span class="band-name band-ocean">Oceanberry</span>
+      <span class="vs-sep">×</span>
+      <span class="band-name band-tara">鱈人ら</span>
+    </div>
+    <p class="hero-sub">合同ラストライブ</p>
+  </div>
+
+
+  <!-- フェード後に残る小タイトル -->
+  <div class="hero-title-mini">
+    <span class="mini-main"><span style="color:#8ec9e8;">おしゃべり</span><span style="color:rgba(245,239,230,0.85);">な波音に誘われ</span><span style="color:#c9a96e;">たら</span></span>
+    <span class="mini-bands">Oceanberry &nbsp;×&nbsp; 鱈人ら &nbsp;·&nbsp; LAST LIVE</span>
+  </div>
+</section>
+
+<section class="info">
+  <div class="info-grid">
+    <div class="info-item reveal">
+      <span class="info-key">DATE</span>
+      <div class="info-val">2026.3.14</small></div>
+    </div>
+    <div class="info-item reveal reveal-delay-1">
+      <span class="info-key">VENUE</span>
+      <div class="info-val">4共30</div>
+    </div>
+    <div class="info-item reveal reveal-delay-2">
+      <span class="info-key">TIME</span>
+      <div class="info-val">
+  <span style="white-space: nowrap;">14:30開場</span> / 
+  <span style="white-space: nowrap;">15:00開演</span> / 
+  <span style="white-space: nowrap;">18:00終演（予定）</span>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="bands">
+  <p class="section-label reveal">— TWO BANDS, ONE FAREWELL —</p>
+  <div style="position:relative;">
+    <div class="bands-grid">
+      <div class="band-card card-ocean reveal">
+        <span class="card-icon">🌊🫐</span>
+        <h2 class="band-name band-ocean card-title">Oceanberry</h2>
+        <!-- バンド写真 2枚：src を実際のパスに変更してください -->
+        <div class="band-photos">
+          <div class="photo-frame">
+            <img src="images/oceanberry_photo1.jpg" alt="Oceanberry 写真1">
+            <span class="photo-caption">Oceanberry</span>
+          </div>
+          <div class="photo-frame">
+            <img src="images/oceanberry_photo2.jpg" alt="Oceanberry 写真2" style="object-position: center 30%;">
+            <span class="photo-caption">Oceanberry</span>
+          </div>
+        </div>
+        <p class="card-desc">
+          オーストラリアのプロアカペラグループ The Idea of North のコピーバンド。
+          2023年3月27日、クレ1・クレ2の縦バンとして活動を開始。バンド名が Oceanberry になった理由は、略称を「おしゃべり」にしたかったから( ｢えぐあか｣ みたいな略称が欲しかった)。Ocean＝青、Berry＝赤というイメージから、衣装は紫色に。
+CL出演を一大目標として活動。最初に取り組んだ曲は｢Isn't She Lovely｣。約2年の修業期間を経て、念願である2025SLに出演。その他、仙台、金沢、名古屋など、各地で演奏機会をいただいた遠征系バンド。
+定期練は水曜の21-23。
+        </p>
+        
+      </div>
+      <div class="band-card card-tara reveal">
+       <span class="card-icon">🐟🕸️</span>
+        <h2 class="band-name band-tara card-title">鱈人ら</h2>
+        <!-- バンド写真 2枚：src を実際のパスに変更してください -->
+        <div class="band-photos">
+          <div class="photo-frame">
+            <img src="images/tarantula_photo1.png" alt="鱈人ら 写真1">
+            <span class="photo-caption">鱈人ら</span>
+          </div>
+          <div class="photo-frame">
+            <img src="images/tarantula_photo2.png" alt="鱈人ら 写真2">
+            <span class="photo-caption">鱈人ら</span>
+          </div>
+        </div>
+        <p class="card-desc">
+          日本のアカペラユニット鱧人(はもじん)のコピーバンド。2024年度夏合宿の企画「鰤望」を経て結成。
+          鱧人にちなんで「魚編の漢字+人」のバンド名を考える中で、「鱈(たら)」+「人(んちゅ)」+「ら」(「人たち」の意)という蜘蛛の名前にもなる語呂の良い組み合わせを思いつき、「鱈人ら(たらんちゅら)」が誕生した。なお、鱧人の「鱧(はも)」は「ハモる」に由来するが、「鱈(たら)」は「鱧人のようになれたら」という願望や、鱧人の代名詞であるスキャット(ta la)っぽさを表している(ということにしている)。
+          メンバーそれぞれの個性を生かした演奏と遊び心溢れるパフォーマンスを武器とする。約1年半活動し、ソラマチアカペラストリートFinalステージや2度のサークルライブに出演を果たした。
+        </p>
+       
+      </div>
+    </div>
+    <div class="center-divide">
+      <div class="cd-line"></div>
+      <div class="cd-badge">VS</div>
+      <div class="cd-line"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    <span class="footer-chunk">OCEANBERRY &nbsp;×&nbsp; 鱈人ら</span>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <span class="footer-chunk">LAST LIVE</span>
+    &nbsp;&nbsp;
+    <span class="footer-chunk">おしゃべりな波音に誘われたら</span>
+  </p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">CLOSE ✕</button>
+  <button class="lightbox-prev" id="lb-prev">‹</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">›</button>
+  <div class="lightbox-counter" id="lb-counter"></div>
+</div>
+
+<script>
+  // ── HERO SLIDESHOW ──────────────────────────────────────
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.hero-slide'));
+    const blurs  = Array.from(document.querySelectorAll('.hero-slide-blur'));
+    if (!slides.length) return;
+    let current = 0;
+    let timer = null;
+    const INTERVAL = 13000;
+
+    // 全スライドの背景画像を一旦クリア
+    [...slides, ...blurs].forEach((el) => {
+      const bg = el.getAttribute('data-bg') || el.style.backgroundImage;
+      if (bg) {
+        el.setAttribute('data-bg', bg);
+        el.style.backgroundImage = '';
+      }
+    });
+
+    function preload(index) {
+      const next = (index + 1) % slides.length;
+      [index, next].forEach(i => {
+        const s = slides[i];
+        const b = blurs[i];
+        if (s && !s.style.backgroundImage && s.getAttribute('data-bg')) {
+          s.style.backgroundImage = s.getAttribute('data-bg');
+        }
+        if (b && !b.style.backgroundImage && b.getAttribute('data-bg')) {
+          b.style.backgroundImage = b.getAttribute('data-bg');
+        }
+      });
+    }
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      blurs[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      preload(current);
+      slides[current].classList.add('active');
+      blurs[current].classList.add('active');
+      resetTimer();
+    }
+    function resetTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), INTERVAL); }
+
+    // タイトルが左下に移動した後（5.2秒後）にスライドショー開始
+    setTimeout(() => {
+      preload(0);
+      slides[0].classList.add('active');
+      blurs[0].classList.add('active');
+      resetTimer();
+    }, 5200);
+
+    let touchStartX = 0;
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+    hero.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+    }, {passive: true});
+  })();
+
+  // ── GALLERY ─────────────────────────────────────────────
+  (function() {
+    const images = window.GALLERY_IMAGES || [];
+    if (!images.length) return;
+
+    const slider   = document.getElementById('gallerySlider');
+    const dotsEl   = document.getElementById('gsDots');
+    const counterEl= document.getElementById('gsCounter');
+    const grid     = document.getElementById('galleryGrid');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lb-img');
+    const lbCounter= document.getElementById('lb-counter');
+
+    let cur = 0, lbCur = 0, timer = null;
+    const INTERVAL = 4500;
+
+    // ── スライド生成
+    images.forEach((img, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'gs-slide' + (i === 0 ? ' active' : '');
+      const el = document.createElement('img');
+      el.src = img.src;
+      el.alt = img.caption || `写真 ${i + 1}`;
+      el.loading = 'lazy';
+      slide.appendChild(el);
+      slider.appendChild(slide);
+
+      // ドット
+      const dot = document.createElement('button');
+      dot.className = 'gs-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `${i + 1}枚目`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function getSlides() { return Array.from(slider.querySelectorAll('.gs-slide')); }
+    function getDots()   { return Array.from(dotsEl.querySelectorAll('.gs-dot')); }
+
+    function goTo(index) {
+      getSlides()[cur].classList.remove('active');
+      getDots()[cur].classList.remove('active');
+      cur = (index + images.length) % images.length;
+      getSlides()[cur].classList.add('active');
+      getDots()[cur].classList.add('active');
+      counterEl.textContent = `${cur + 1} / ${images.length}`;
+      resetTimer();
+    }
+    function resetTimer() { clearInterval(timer); timer = setInterval(() => goTo(cur + 1), INTERVAL); }
+
+    counterEl.textContent = `1 / ${images.length}`;
+    resetTimer();
+
+    document.getElementById('gsPrev').addEventListener('click', () => goTo(cur - 1));
+    document.getElementById('gsNext').addEventListener('click', () => goTo(cur + 1));
+
+    // スワイプ
+    let tx = 0;
+    const wrap = document.getElementById('gallerySliderWrap');
+    wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive: true});
+    wrap.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
+    }, {passive: true});
+
+    // スライダークリック → ライトボックス
+    slider.addEventListener('click', () => openLb(cur));
+
+    // ── ライトボックス
+    function openLb(index) {
+      lbCur = index;
+      lbImg.src = images[lbCur].src;
+      lbImg.alt = images[lbCur].caption || `写真 ${lbCur + 1}`;
+      lbCounter.textContent = `${lbCur + 1} / ${images.length}`;
+      lightbox.classList.add('open');
+    }
+    function moveLb(dir) {
+      lbCur = (lbCur + dir + images.length) % images.length;
+      lbImg.style.opacity = '0';
+      setTimeout(() => {
+        lbImg.src = images[lbCur].src;
+        lbImg.alt = images[lbCur].caption || `写真 ${lbCur + 1}`;
+        lbCounter.textContent = `${lbCur + 1} / ${images.length}`;
+        lbImg.style.opacity = '1';
+      }, 150);
+    }
+
+    document.getElementById('lb-close').addEventListener('click', () => lightbox.classList.remove('open'));
+    document.getElementById('lb-prev').addEventListener('click', () => moveLb(-1));
+    document.getElementById('lb-next').addEventListener('click', () => moveLb(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+    // キーボード
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')      lightbox.classList.remove('open');
+      if (e.key === 'ArrowLeft')   moveLb(-1);
+      if (e.key === 'ArrowRight')  moveLb(1);
+    });
+  })();
+
+  // ── REVEAL ──────────────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  // ── BAND PHOTO LIGHTBOX (既存の photo-frame 用) ─────────
+  const frames = Array.from(document.querySelectorAll('.photo-frame'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lb-img');
+  const lbCounter= document.getElementById('lb-counter');
+  let lbFrameCur = 0;
+
+  function openFrameLb(index) {
+    lbFrameCur = index;
+    const img = frames[lbFrameCur].querySelector('img');
+    lbImg.src = img.src; lbImg.alt = img.alt;
+    lbCounter.textContent = `${lbFrameCur + 1} / ${frames.length}`;
+    lightbox.classList.add('open');
+  }
+  frames.forEach((frame, i) => frame.addEventListener('click', () => openFrameLb(i)));
+
+  // closeボタン・背景クリック・Escapeキーで閉じる
+  document.getElementById('lb-close').addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') lightbox.classList.remove('open');
+  });
+</script>
+</body>
+</html>
