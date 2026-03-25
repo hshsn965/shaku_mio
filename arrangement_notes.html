@@ -205,36 +205,18 @@
     border-top: 1px solid rgba(245,240,232,0.07);
   }
 
-  /* fields */
-  .field-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.4rem 2.5rem;
-  }
-
-  .field-full { grid-column: 1 / -1; }
-
-  .field-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.4em;
-    color: var(--red);
-    margin-bottom: 0.5rem;
-    opacity: 0.85;
-  }
-
-  .field-text {
+  /* note */
+  .note-text {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: clamp(0.78rem, 1.3vw, 0.88rem);
-    color: rgba(245,240,232,0.72);
-    line-height: 1.9;
+    font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+    color: rgba(245,240,232,0.75);
+    line-height: 2;
     white-space: pre-wrap;
   }
 
-  .field-text.empty {
-    color: rgba(245,240,232,0.18);
+  .note-text.empty {
+    color: rgba(245,240,232,0.2);
     font-style: italic;
-    font-size: 0.78rem;
   }
 
   /* ── FOOTER ── */
@@ -262,9 +244,7 @@
     color: rgba(245,240,232,0.18);
   }
 
-  @media (max-width: 700px) {
-    .field-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 700px) { }
 </style>
 </head>
 <body>
@@ -280,7 +260,6 @@
 <section class="arrange-section">
   <p class="section-label">ARRANGEMENT NOTES — 澪標</p>
   <p class="arrange-intro">
-    各楽曲のアレンジについて、編成・工夫した点・聴きどころを曲ごとにご紹介します。<br>
     タイトルをクリックすると詳細が展開されます。
   </p>
 
@@ -299,24 +278,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -334,24 +296,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -369,24 +314,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -404,24 +332,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -439,24 +350,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -474,24 +368,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -509,24 +386,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>
@@ -544,24 +404,7 @@
       </button>
       <div class="acc-body">
         <div class="acc-body-inner">
-          <div class="field-grid">
-            <div class="field-full">
-              <p class="field-label">アレンジのポイント</p>
-              <p class="field-text empty">（ここに解説を記入してください）</p>
-            </div>
-            <div>
-              <p class="field-label">編成 / 担当パート</p>
-              <p class="field-text empty">（編成・各パートの役割など）</p>
-            </div>
-            <div>
-              <p class="field-label">聴きどころ</p>
-              <p class="field-text empty">（特に注目してほしい箇所）</p>
-            </div>
-            <div class="field-full">
-              <p class="field-label">その他・備考</p>
-              <p class="field-text empty">（自由記入）</p>
-            </div>
-          </div>
+          <p class="note-text empty">（ここにアレンジの解説を自由に記入してください）</p>
         </div>
       </div>
     </div>

@@ -641,6 +641,122 @@
 
   .arrange-link-btn:hover .al-arrow { transform: translateX(4px); }
 
+  /* ── SPOILER PANEL (劇・合同曲共通) ── */
+  .spoiler-section {
+    padding: 4vw 6vw;
+    border-bottom: 1px solid rgba(245,240,232,0.07);
+  }
+
+  .spoiler-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: 1px solid rgba(220,0,0,0.35);
+    color: var(--white);
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .spoiler-btn:hover { background: rgba(220,0,0,0.07); border-color: rgba(220,0,0,0.6); }
+  .spoiler-btn .sp-icon { font-size: 1.1rem; color: var(--red); flex-shrink: 0; }
+
+  .spoiler-btn .sp-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+    letter-spacing: 0.3em;
+    flex: 1;
+  }
+
+  .spoiler-btn .sp-warning {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: rgba(245,240,232,0.35);
+  }
+
+  .spoiler-btn .sp-chevron {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .spoiler-btn .sp-chevron::before,
+  .spoiler-btn .sp-chevron::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 7px; height: 1.5px;
+    background: rgba(245,240,232,0.35);
+  }
+
+  .spoiler-btn .sp-chevron::before { left: 2px;  transform: translateY(-50%) rotate(45deg); }
+  .spoiler-btn .sp-chevron::after  { right: 2px; transform: translateY(-50%) rotate(-45deg); }
+  .spoiler-btn.open .sp-chevron { transform: rotate(180deg); }
+  .spoiler-btn.open .sp-chevron::before,
+  .spoiler-btn.open .sp-chevron::after { background: var(--red); }
+
+  .spoiler-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .spoiler-body-inner { padding: 2.5rem 0 0.5rem; }
+
+  /* 劇コンテンツ */
+  .drama-text {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(0.88rem, 1.4vw, 1rem);
+    line-height: 2.2;
+    color: rgba(245,240,232,0.8);
+    max-width: 720px;
+  }
+
+  .drama-text .placeholder {
+    color: rgba(245,240,232,0.22);
+    font-style: italic;
+  }
+
+  /* 合同曲コンテンツ */
+  .collab-song-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 720px;
+  }
+
+  .collab-song-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    letter-spacing: 0.04em;
+  }
+
+  .collab-song-title .accent { color: var(--red); }
+
+  .collab-song-meta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .collab-song-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(0.88rem, 1.4vw, 1rem);
+    line-height: 2.2;
+    color: rgba(245,240,232,0.8);
+  }
+
+  .collab-song-desc .placeholder {
+    color: rgba(245,240,232,0.22);
+    font-style: italic;
+  }
+
   /* ── MEMBERS ── */
   .members-section {
     padding: 6vw 6vw 5vw;
@@ -776,6 +892,40 @@
     <span class="info-val">爵士Γ韻 × 澪標</span>
   </div>
 </div>
+
+<!-- MEMBERS -->
+<section class="members-section">
+  <p class="section-label">MEMBERS</p>
+  <div class="members-grid">
+
+    <!-- 澪標 -->
+    <div class="member-group">
+      <h2 class="member-band-heading"><span class="accent">澪</span>標</h2>
+      <div class="member-divider"></div>
+      <ul class="member-list">
+        <li class="member-item"><span class="member-num">01</span><span class="member-name">おざ</span></li>
+        <li class="member-item"><span class="member-num">02</span><span class="member-name">タコピー</span></li>
+        <li class="member-item"><span class="member-num">03</span><span class="member-name">はかせ</span></li>
+        <li class="member-item"><span class="member-num">04</span><span class="member-name">しのしの</span></li>
+        <li class="member-item"><span class="member-num">05</span><span class="member-name">中田</span></li>
+      </ul>
+    </div>
+
+    <!-- 爵士Γ韻 -->
+    <div class="member-group">
+      <h2 class="member-band-heading"><span class="accent">爵士</span>𝚪韻</h2>
+      <div class="member-divider"></div>
+      <ul class="member-list">
+        <li class="member-item"><span class="member-num">01</span><span class="member-name">ぽむ</span></li>
+        <li class="member-item"><span class="member-num">02</span><span class="member-name">紅葉</span></li>
+        <li class="member-item"><span class="member-num">03</span><span class="member-name">ジョモ</span></li>
+        <li class="member-item"><span class="member-num">04</span><span class="member-name">カンフォー</span></li>
+        <li class="member-item"><span class="member-num">05</span><span class="member-name">ゆき</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
 
 <!-- SETLIST -->
 <section class="setlist-section">
@@ -944,40 +1094,6 @@
   </div>
 </section>
 
-<!-- MEMBERS -->
-<section class="members-section">
-  <p class="section-label">MEMBERS</p>
-  <div class="members-grid">
-
-    <!-- 澪標 -->
-    <div class="member-group">
-      <h2 class="member-band-heading"><span class="accent">澪</span>標</h2>
-      <div class="member-divider"></div>
-      <ul class="member-list">
-        <li class="member-item"><span class="member-num">01</span><span class="member-name">おざ</span></li>
-        <li class="member-item"><span class="member-num">02</span><span class="member-name">タコピー</span></li>
-        <li class="member-item"><span class="member-num">03</span><span class="member-name">はかせ</span></li>
-        <li class="member-item"><span class="member-num">04</span><span class="member-name">しのしの</span></li>
-        <li class="member-item"><span class="member-num">05</span><span class="member-name">中田</span></li>
-      </ul>
-    </div>
-
-    <!-- 爵士Γ韻 -->
-    <div class="member-group">
-      <h2 class="member-band-heading"><span class="accent">爵士</span>𝚪韻</h2>
-      <div class="member-divider"></div>
-      <ul class="member-list">
-        <li class="member-item"><span class="member-num">01</span><span class="member-name">ぽむ</span></li>
-        <li class="member-item"><span class="member-num">02</span><span class="member-name">紅葉</span></li>
-        <li class="member-item"><span class="member-num">03</span><span class="member-name">ジョモ</span></li>
-        <li class="member-item"><span class="member-num">04</span><span class="member-name">カンフォー</span></li>
-        <li class="member-item"><span class="member-num">05</span><span class="member-name">ゆき</span></li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
 <!-- ARRANGEMENT NOTES LINK -->
 <section class="arrange-link-section">
   <p class="section-label">ARRANGEMENT NOTES — 澪標</p>
@@ -985,6 +1101,48 @@
     <span class="al-label">各楽曲のアレンジ解説を読む</span>
     <span class="al-arrow">→</span>
   </a>
+</section>
+
+<!-- DRAMA SPOILER -->
+<section class="spoiler-section">
+  <p class="section-label">DRAMA</p>
+  <button class="spoiler-btn" id="dramaToggle" type="button">
+    <span class="sp-icon">⚠</span>
+    <span class="sp-label">SPOILER — クリックで劇の情報を表示</span>
+    <span class="sp-warning">ネタバレ注意</span>
+    <span class="sp-chevron"></span>
+  </button>
+  <div class="spoiler-body" id="dramaBody">
+    <div class="spoiler-body-inner">
+      <p class="drama-text">
+        <span class="placeholder">（劇のあらすじ・背景情報をここに記入してください）</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COLLAB SONG SPOILER -->
+<section class="spoiler-section">
+  <p class="section-label">COLLAB SONG — 爵士Γ韻 × 澪標</p>
+  <button class="spoiler-btn" id="collabToggle" type="button">
+    <span class="sp-icon">⚠</span>
+    <span class="sp-label">SPOILER — クリックで合同曲の情報を表示</span>
+    <span class="sp-warning">ネタバレ注意</span>
+    <span class="sp-chevron"></span>
+  </button>
+  <div class="spoiler-body" id="collabBody">
+    <div class="spoiler-body-inner">
+      <div class="collab-song-block">
+        <div>
+          <p class="collab-song-title">ハッピー<span class="accent">ジャム</span>ジャム</p>
+          <p class="collab-song-meta">爵士Γ韻 × 澪標　合同アレンジ</p>
+        </div>
+        <p class="collab-song-desc">
+          <span class="placeholder">（アレンジのポイント・両バンドの絡み方・聴きどころなどをここに記入してください）</span>
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- CTA -->
@@ -1018,6 +1176,22 @@
   });
 
   // アレンジノート アコーディオン不要（別ページへ移動済み）
+
+  // 汎用スポイラートグル
+  [['dramaToggle', 'dramaBody'], ['collabToggle', 'collabBody']].forEach(([btnId, bodyId]) => {
+    const btn = document.getElementById(btnId);
+    const body = document.getElementById(bodyId);
+    btn.addEventListener('click', () => {
+      const isOpen = btn.classList.contains('open');
+      if (isOpen) {
+        btn.classList.remove('open');
+        body.style.maxHeight = '0';
+      } else {
+        btn.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
 </script>
 
 </body>
