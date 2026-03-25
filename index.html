@@ -3,28 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPECIAL PROMOTION — おしゃべりな波音に誘われたら</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>爵士𝚪韻 × 澪標 共催ラストライブ - 宣伝特設ページ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500&family=Montserrat:wght@200;300;400&family=Shippori+Mincho&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ocean: #1a3a5c;
-    --deep: #0d1f33;
-    --berry: #4a1942;
-    --cream: #f5efe6;
-    --gold: #c9a96e;
-    --foam: #8ec9e8;
-    --tara-gold: #d4a574;
+    /* アップロード画像に基づいたアンバー・和モダンカラー */
+    --base-bg: #1a1612; /* 深い夕暮れ、黒に近い茶 */
+    --card-bg: #2a241c; /* カード背景 */
+    --accent-amber: #dca35a; /* 木漏れ日の暖かさ、アンバーゴールド */
+    --main-text: #f0eae1; /* 柔らかな白、クリーム */
+    --sub-text: rgba(240, 234, 225, 0.7);
+    --border-color: rgba(220, 163, 90, 0.3);
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  
   body {
-    background: var(--deep);
-    color: var(--cream);
+    background-color: var(--base-bg);
+    color: var(--main-text);
     font-family: 'Noto Serif JP', serif;
-    line-height: 1.6;
+    font-weight: 300;
+    line-height: 1.8;
     overflow-x: hidden;
   }
 
-  /* ── HERO ── */
+  /* ── タイポグラフィ ── */
+  .font-en { font-family: 'Montserrat', sans-serif; }
+  .font-title { font-family: 'Shippori Mincho', serif; }
+
+  /* ── ヘッダー/メインビジュアル ── */
   .hero {
     height: 100vh;
     display: flex;
@@ -32,211 +39,235 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(rgba(13,31,51,0.7), rgba(13,31,51,0.7)), url('images/IMG_0136.JPG') center/cover;
+    /* 背景画像：アップロード画像を使用。温かいアンバーのグラデーションを重ねる */
+    background: 
+      linear-gradient(to bottom, rgba(26,22,18,0.4), rgba(26,22,18,0.9)),
+      url('S__3514380.png') center/cover;
     position: relative;
+    padding: 2rem;
   }
-  .hero-eyebrow {
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 0.5em;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-  .hero-vs {
-    margin: 2.5rem 0;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-  .vs-ocean { color: var(--foam); text-shadow: 0 0 15px rgba(142,201,232,0.4); }
-  .vs-tara { color: var(--tara-gold); text-shadow: 0 0 15px rgba(212,165,116,0.4); }
 
-  /* ── SECTION COMMON ── */
-  section { padding: 8rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--accent-amber);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 3rem;
+  }
+
+  .hero-lyrics {
+    font-size: 0.9rem;
+    color: var(--sub-text);
+    font-style: italic;
+    max-width: 600px;
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* ── セクション共通 ── */
+  section { padding: 10rem 2rem 6rem; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--accent-amber);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
   .section-title {
     text-align: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-style: italic;
+    font-size: 2.5rem;
+    font-weight: 400;
     margin-bottom: 5rem;
-    color: var(--gold);
     position: relative;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
   }
   .section-title::after {
-    content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 1px; background: var(--gold);
+    content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+    width: 40px; height: 1px; background-color: var(--accent-amber);
   }
 
-  /* ── MEMBERS ── */
-  .band-wrapper { margin-bottom: 8rem; }
-  .band-label {
-    font-size: 2.2rem;
-    font-family: 'Cormorant Garamond', serif;
-    margin-bottom: 2.5rem;
+  /* ── メンバー紹介 ── */
+  .bands-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .band-box h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
   }
-  .band-label::after { content: ''; flex: 1; height: 1px; background: rgba(201,169,110,0.2); }
+  .band-box h3::before {
+    content: ''; width: 6px; height: 2rem; background-color: var(--accent-amber);
+    display: inline-block;
+  }
 
-  .member-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
+  .member-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
+
   .member-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 2rem 1rem;
-    border-radius: 4px;
-    text-align: center;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.02);
+    padding: 1rem 1.5rem;
+    border-radius: 2px;
+    font-weight: 400;
     transition: all 0.4s ease;
   }
-  .member-card:hover { 
-    transform: translateY(-8px); 
-    background: rgba(255,255,255,0.07);
-    border-color: var(--gold);
+  .member-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-amber);
+    background-color: #342d22;
   }
-  .m-part { font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.2em; display: block; margin-bottom: 0.5rem;}
-  .m-name { font-size: 1.1rem; font-weight: 300; display: block; }
 
-  /* ── SETLIST ── */
-  .setlist-container {
+  /* ── セットリスト ── */
+  .setlist-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5rem;
   }
-  .setlist-box h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.4em; margin-bottom: 2rem; font-size: 1.4rem;}
-  .ocean-text { color: var(--foam); }
-  .tara-text { color: var(--tara-gold); }
-  .song-row {
+
+  .setlist-band-h4 {
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+    color: var(--sub-text);
+  }
+
+  .song-item {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(245,239,230,0.08);
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border-color);
     font-size: 0.95rem;
-  }
-  .song-idx { opacity: 0.4; margin-right: 1.2rem; font-family: 'Bebas Neue', sans-serif; }
-
-  @media (max-width: 768px) {
-    .setlist-container { grid-template-columns: 1fr; gap: 4rem; }
-    .hero-vs { flex-direction: column; gap: 0.8rem; }
+    align-items: center;
   }
 
+  .song-number {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--accent-amber);
+    margin-right: 1.5rem;
+    font-weight: 200;
+  }
+  .song-title { flex: 1; }
+
+  /* ── フッター ── */
   footer {
     text-align: center;
-    padding: 5rem 2rem;
-    background: #050b12;
-    border-top: 1px solid rgba(201,169,110,0.1);
+    padding: 6rem 2rem;
+    background-color: #12100d;
+    border-top: 1px solid var(--border-color);
   }
   .footer-text {
     font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    color: rgba(245,239,230,0.25);
+    letter-spacing: 0.2em;
+    color: var(--sub-text);
     text-transform: uppercase;
+  }
+
+  /* モバイル対応 */
+  @media (max-width: 768px) {
+    .hero-lyrics { font-size: 0.8rem; bottom: 3rem; }
+    .bands-container, .setlist-wrapper { grid-template-columns: 1fr; gap: 4rem; }
   }
 </style>
 </head>
 <body>
 
 <section class="hero">
-  <p class="hero-eyebrow">The Joint Last Live Showcase</p>
-  <h1 class="hero-title">おしゃべりな波音に<br>誘われたら</h1>
-  <div class="hero-vs">
-    <span class="vs-ocean">Oceanberry</span>
-    <span style="color:white; opacity: 0.3; font-size: 1.2rem;">×</span>
-    <span class="vs-tara">鱈人ら</span>
-  </div>
-  <p style="letter-spacing: 0.3em; font-size: 0.9rem;">2026.03.14 — OPEN 14:30 / START 15:00</p>
-  <p style="color: var(--gold); margin-top: 0.5rem; font-size: 0.8rem;">VENUE: 4共30</p>
+  <p class="hero-eyebrow font-en">JAZZ×MIOTSUKUSHI LAST LIVE</p>
+  <p class="hero-subtitle">爵士𝚪韻 × 澪標 共催</p>
+  <h1 class="hero-title font-title">「四月から平士𝚪員、<br>最後まで歌い標」</h1>
+  
+  <p class="hero-lyrics">おしゃべりな波音に誘われたら、君は愛しくなる。<br>あの日交わした密約は、黄昏に消えていく。</p>
 </section>
 
 <section id="members">
-  <h2 class="section-title">Lineup</h2>
+  <span class="section-label">LINEUP</span>
+  <h2 class="section-title">出演</h2>
   
-  <div class="band-wrapper">
-    <h3 class="band-label ocean-text">Oceanberry</h3>
-    <div class="member-grid">
-      <div class="member-card">
-        <span class="m-part">Top</span>
-        <span class="m-name">もえりん</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">2nd / Bandmaster</span>
-        <span class="m-name">紅葉</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">3rd</span>
-        <span class="m-name">奏</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">Bass</span>
-        <span class="m-name">しのしの</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">PA</span>
-        <span class="m-name">てふ</span>
+  <div class="bands-container">
+    <div class="band-box">
+      <h3>爵士𝚪韻 <span class="font-en" style="font-size: 0.7rem; color:var(--sub-text);">JAZZ-RAIN</span></h3>
+      <div class="member-list">
+        <div class="member-card">ぽむ</div>
+        <div class="member-card">紅葉</div>
+        <div class="member-card">ジョモ</div>
+        <div class="member-card">カンフォー</div>
+        <div class="member-card">ゆき</div>
       </div>
     </div>
-  </div>
 
-  <div class="band-wrapper">
-    <h3 class="band-label tara-text">鱈人ら</h3>
-    <div class="member-grid">
-      <div class="member-card">
-        <span class="m-part">Vocal</span>
-        <span class="m-name">せっこー</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">Vocal</span>
-        <span class="m-name">響</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">Vocal</span>
-        <span class="m-name">ばーさく</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">Vocal Bass / Perc.</span>
-        <span class="m-name">NJ</span>
-      </div>
-      <div class="member-card">
-        <span class="m-part">PA</span>
-        <span class="m-name">てふ</span>
+    <div class="band-box">
+      <h3>澪標 <span class="font-en" style="font-size: 0.7rem; color:var(--sub-text);">MIOTSUKUSHI</span></h3>
+      <div class="member-list">
+        <div class="member-card">おざ</div>
+        <div class="member-card">たこぴー</div>
+        <div class="member-card">はかせ</div>
+        <div class="member-card">しのしの</div>
+        <div class="member-card">中田</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="setlist" style="background: rgba(0,0,0,0.2);">
-  <h2 class="section-title">Featured Songs</h2>
-  <div class="setlist-container">
-    <div class="setlist-box">
-      <h3 class="ocean-text">Oceanberry Selection</h3>
-      <div class="song-row"><span class="song-idx">01</span><span>Armando's Rhumba</span></div>
-      <div class="song-row"><span class="song-idx">02</span><span>Fields of Gold</span></div>
-      <div class="song-row"><span class="song-idx">03</span><span>Keep My Supper Warm</span></div>
-      <div class="song-row"><span class="song-idx">04</span><span>Isn't She Lovely</span></div>
-    </div>
-    <div class="setlist-box">
-      <h3 class="tara-text">鱈人ら Selection</h3>
-      <div class="song-row"><span class="song-idx">01</span><span>Spain</span></div>
-      <div class="song-row"><span class="song-idx">02</span><span>密約</span></div>
-      <div class="song-row"><span class="song-idx">03</span><span>Monkey Magic</span></div>
-      <div class="song-row"><span class="song-idx">04</span><span>Take Five</span></div>
+<section id="setlist" style="background-color: var(--card-bg); max-width: 100%;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <span class="section-label">TRACKS</span>
+    <h2 class="section-title">代表曲</h2>
+    
+    <div class="setlist-wrapper">
+      <div class="setlist-band">
+        <h4 class="setlist-band-h4">爵士𝚪韻</h4>
+        <div class="song-item"><span class="song-number font-en">01</span><span class="song-title">Spain</span></div>
+        <div class="song-item"><span class="song-number font-en">02</span><span class="song-title">Take Five</span></div>
+        <div class="song-item"><span class="song-number font-en">03</span><span class="song-title">Armando's Rhumba</span></div>
+        <div class="song-item"><span class="song-number font-en">04</span><span class="song-title">Monkey Magic</span></div>
+      </div>
+      <div class="setlist-band">
+        <h4 class="setlist-band-h4">澪標</h4>
+        <div class="song-item"><span class="song-number font-en">01</span><span class="song-title">Keep My Supper Warm</span></div>
+        <div class="song-item"><span class="song-number font-en">02</span><span class="song-title">Isn't She Lovely</span></div>
+        <div class="song-item"><span class="song-number font-en">03</span><span class="song-title">Fields of Gold</span></div>
+        <div class="song-item"><span class="song-number font-en">04</span><span class="song-title">密約</span></div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p class="footer-text">OCEANBERRY × 鱈人ら<br>Joint Last Live Promotion Page</p>
+  <p class="footer-text">爵士𝚪韻 × 澪標 共催ラストライブ<br>「四月から平士𝚪員、最後まで歌い標」<br>© 2026 THE JOINT FINAL SHOWCASE</p>
 </footer>
 
 </body>
