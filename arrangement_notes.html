@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrangement Notes — 澪標</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e00;
+    --white: #f5f0e8;
+    --black: #0a0a0a;
+    --gray: #1a1a1a;
+    --gray2: #181818;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 3.5vw 6vw 2.5vw;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.8rem;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--white); }
+  .back-link .arrow { color: var(--red); }
+
+  .page-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .page-title .accent { color: var(--red); }
+
+  .page-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: rgba(245,240,232,0.3);
+    margin-top: 0.6rem;
+  }
+
+  /* ── SHARED SECTION LABEL ── */
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    color: var(--red);
+    margin-bottom: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(220,0,0,0.3);
+  }
+
+  /* ── ARRANGE SECTION ── */
+  .arrange-section {
+    padding: 5vw 6vw;
+  }
+
+  .arrange-intro {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+    color: rgba(245,240,232,0.45);
+    line-height: 2;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── ACCORDION ── */
+  .accordion { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .acc-item {
+    border: 1px solid rgba(245,240,232,0.09);
+    background: var(--gray2);
+    transition: border-color 0.25s;
+  }
+
+  .acc-item.open { border-color: rgba(220,0,0,0.45); }
+
+  .acc-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.15rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    cursor: pointer;
+    text-align: left;
+    color: var(--white);
+    transition: background 0.15s;
+  }
+
+  .acc-trigger:hover { background: rgba(255,255,255,0.025); }
+
+  .acc-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.72rem;
+    color: var(--red);
+    flex-shrink: 0;
+    min-width: 1.4rem;
+  }
+
+  .acc-titles { flex: 1; display: flex; flex-direction: column; gap: 0.1rem; }
+
+  .acc-title-ja {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    line-height: 1.3;
+  }
+
+  .acc-title-artist {
+    font-size: 0.67rem;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 0.04em;
+  }
+
+  .acc-part-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    color: rgba(245,240,232,0.28);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 0.15em 0.55em;
+    flex-shrink: 0;
+  }
+
+  .acc-chevron {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .acc-chevron::before,
+  .acc-chevron::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 7px;
+    height: 1.5px;
+    background: rgba(245,240,232,0.35);
+    transition: background 0.2s;
+  }
+
+  .acc-chevron::before { left: 2px; transform: translateY(-50%) rotate(45deg); }
+  .acc-chevron::after  { right: 2px; transform: translateY(-50%) rotate(-45deg); }
+
+  .acc-item.open .acc-chevron { transform: rotate(180deg); }
+  .acc-item.open .acc-chevron::before,
+  .acc-item.open .acc-chevron::after { background: var(--red); }
+
+  .acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .acc-body-inner {
+    padding: 1.5rem 1.5rem 1.8rem;
+    border-top: 1px solid rgba(245,240,232,0.07);
+  }
+
+  /* fields */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem 2.5rem;
+  }
+
+  .field-full { grid-column: 1 / -1; }
+
+  .field-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+    opacity: 0.85;
+  }
+
+  .field-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: clamp(0.78rem, 1.3vw, 0.88rem);
+    color: rgba(245,240,232,0.72);
+    line-height: 1.9;
+    white-space: pre-wrap;
+  }
+
+  .field-text.empty {
+    color: rgba(245,240,232,0.18);
+    font-style: italic;
+    font-size: 0.78rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(245,240,232,0.07);
+    padding: 2rem 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 4vw;
+  }
+
+  .footer-bands {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .footer-note {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.18);
+  }
+
+  @media (max-width: 700px) {
+    .field-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <a class="back-link" href="last_live.html"><span class="arrow">←</span> BACK TO MAIN</a>
+  <h1 class="page-title">Arrangement <span class="accent">Notes</span></h1>
+  <p class="page-sub">澪標 — 各楽曲アレンジ解説</p>
+</header>
+
+<!-- ARRANGEMENT NOTES -->
+<section class="arrange-section">
+  <p class="section-label">ARRANGEMENT NOTES — 澪標</p>
+  <p class="arrange-intro">
+    各楽曲のアレンジについて、編成・工夫した点・聴きどころを曲ごとにご紹介します。<br>
+    タイトルをクリックすると詳細が展開されます。
+  </p>
+
+  <div class="accordion">
+
+    <!-- 01 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">01</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">ひとりごつ</span>
+          <span class="acc-title-artist">ちいかわ</span>
+        </div>
+        <span class="acc-part-tag">1 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">02</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">打ち上げ花火</span>
+          <span class="acc-title-artist">米津玄師</span>
+        </div>
+        <span class="acc-part-tag">1 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">03</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">海の幽霊</span>
+          <span class="acc-title-artist">米津玄師</span>
+        </div>
+        <span class="acc-part-tag">1 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">04</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">時の流れに身をまかせ</span>
+          <span class="acc-title-artist">テレサ・テン</span>
+        </div>
+        <span class="acc-part-tag">3 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">05</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">人生は夢だらけ</span>
+          <span class="acc-title-artist">椎名林檎</span>
+        </div>
+        <span class="acc-part-tag">3 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">06</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">火炎</span>
+          <span class="acc-title-artist">女王蜂</span>
+        </div>
+        <span class="acc-part-tag">3 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">07</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">さよーならまたいつか</span>
+          <span class="acc-title-artist">米津玄師</span>
+        </div>
+        <span class="acc-part-tag">3 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="acc-item" data-acc>
+      <button class="acc-trigger" type="button">
+        <span class="acc-num">08</span>
+        <div class="acc-titles">
+          <span class="acc-title-ja">aka</span>
+          <span class="acc-title-artist">aiko</span>
+        </div>
+        <span class="acc-part-tag">3 PART</span>
+        <span class="acc-chevron"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="field-grid">
+            <div class="field-full">
+              <p class="field-label">アレンジのポイント</p>
+              <p class="field-text empty">（ここに解説を記入してください）</p>
+            </div>
+            <div>
+              <p class="field-label">編成 / 担当パート</p>
+              <p class="field-text empty">（編成・各パートの役割など）</p>
+            </div>
+            <div>
+              <p class="field-label">聴きどころ</p>
+              <p class="field-text empty">（特に注目してほしい箇所）</p>
+            </div>
+            <div class="field-full">
+              <p class="field-label">その他・備考</p>
+              <p class="field-text empty">（自由記入）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /accordion -->
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-bands">爵士Γ韻 × 澪標</span>
+  <span class="footer-note">LAST LIVE &nbsp;|&nbsp; 2026.03.26 &nbsp;|&nbsp; 四共21</span>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-acc] .acc-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('[data-acc]');
+      const body = item.querySelector('.acc-body');
+      const inner = item.querySelector('.acc-body-inner');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('[data-acc].open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.acc-body').style.maxHeight = '0';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        body.style.maxHeight = inner.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
